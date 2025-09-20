@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MrCoolChick | 我的個人網頁</title>
+  <style>
+    @font-face {
+      font-family: 'Cubic';
+      src: url('./font/Cubic_11_1.100_R.woff2') format('woff2');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+    body {
+      font-family: 'Cubic', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      background-color: #ffffff;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    section {
+      padding: 2rem;
+    }
+    header {
+      background: rgba(255, 255, 255, 0.85);
+      color: #000000;
+      padding: 10px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1001;
+      backdrop-filter: blur(2px);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: auto;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    .header-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-align: left;
+    }
+    .header-nav a {
+      color: #000000;
+      text-decoration: none;
+      margin: 0 1.5rem;
+      font-size: 1rem;
+      transition: color 0.2s;
+      text-align: right;
+    }
+    .header-nav a:hover {
+      color: #515151;
+    }
+    .profile {
+      background: #ffd700;
+    }
+    .profile-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 80%;
+      margin: 0 auto;
+      gap: 1.5rem;
+    }
+    .profile-img {
+      width: 300px;
+      height: 300px;
+      border-radius: 16px;
+      object-fit: cover;
+      margin-left: auto;
+      margin-right: 1.5rem;
+
+    }
+    .profile-text {
+      font-size: 1.1rem;
+      margin-left: 0;
+      margin-right: auto;
+    }
+    .works {
+      background: linear-gradient(to bottom, #ffffff, #fff4ae);
+      padding: 1.5rem;
+      text-align: center;
+    }
+    /* 作品輪播樣式 */
+    .carousel {
+      position: relative;
+      overflow: hidden;
+      width: 80%;
+      border-radius: 4px;
+      margin: 0 auto;
+      min-height: 600px;
+    }
+    .carousel-img {
+      display: block !important;
+      margin: 0 auto;
+      opacity: 0;
+      transition: opacity 0.5s;
+      position: absolute;
+      top: 0; left: 10%;
+      width: 80%;
+      height: 600px;
+      object-fit: contain;
+      border-radius: 4px;
+      z-index: 1;
+      pointer-events: none;
+      image-rendering: pixelated;
+    }
+    .carousel-img.active {
+      opacity: 1;
+      z-index: 2;
+      pointer-events: auto;
+    }
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100px;
+      height: 100px;
+      background: #ffffff00;
+      color: #000000;
+      border: none;
+      padding: 0.5rem;
+      cursor: pointer;
+      z-index: 10;
+      font-size: 2rem;
+      font-weight: bold;
+      align-items: center;
+      justify-content: center;
+    }
+    .carousel-btn.left {
+      left: 0px;
+    }
+    .carousel-btn.right {
+      right: 0px;
+    }
+    .carousel-desc {
+      left: 10%;
+      bottom: 0;
+      width: 80%;
+      color: #000000;
+      font-size: 1rem;
+      padding: 0.7rem 1rem;
+      border-radius: 0 0 4px 4px;
+      z-index: 3;
+      margin: 0 auto;
+      box-sizing: border-box;    
+    }
+    /* 成就解鎖區域樣式 */
+    .achievement {
+      background: #ffd700;
+      text-align: center;
+    }
+    .achievement-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+      gap: 30px;
+      width: 80%;
+      height: 250px;
+    }
+    .achievement-single {
+      position: relative;
+      display: inline-block;
+      width: 200px;
+      height: 280px;
+    }
+    .achievement-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      width: 200px;
+      height: 200px;
+      border-radius: 32px;
+      object-fit: cover;
+      image-rendering: pixelated;
+    }
+    .achievement-lock {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2;
+      width: 200px;
+      height: 200px;
+      border-radius: 32px;
+      object-fit: cover;
+      image-rendering: pixelated;
+      opacity: 0.9;
+      transition: opacity 0.5s;
+    }
+    .achievement-lock.unlocked {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .achievement-single p {
+      position: absolute;
+      left: 50%;
+      bottom: 0px;
+      transform: translateX(-50%);
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #000000;
+      white-space: nowrap;
+    }
+    /* 頁尾樣式 */
+    footer {
+      background: #333;
+      color: #fff;
+      text-align: center;
+      padding: 2rem 1rem 1rem 1rem;
+      margin-top: 2rem;
+    }
+    .footer-nav {
+      margin-bottom: 1rem;
+    }
+    .footer-nav a {
+      color: #ffd700;
+      text-decoration: none;
+      margin: 0 1.2rem;
+      font-size: 1rem;
+      transition: color 0.2s;
+    }
+    .footer-nav a:hover {
+      color: #fff;
+    }
+    .footer-desc {
+      margin-bottom: 0.7rem;
+      color: #ccc;
+      font-size: 0.98rem;
+    }
+  </style>
+</head>
+<body id="top">
+  <!-- 頁首區塊 -->
+  <header>
+    <div class="header-container">
+      <div class="header-title">MrCoolChick | 我的個人網頁</div>
+      <nav class="header-nav">
+        <a href="#profile">玩家資訊</a>
+        <a href="#works">技能展示</a>
+        <a href="#achievement">成就解鎖</a>
+      </nav>
+    </div>
+  </header>
+  
+  <!-- 個人資料區域 -->
+  <section class="profile" id="profile">
+    <div class="profile-container"> 
+      <img src="./image/pro.jpg" alt="profile image" class="profile-img">
+      <div class="profile-text">
+        <h2>玩家資料</h2>
+        <p><strong>名稱: </strong>MrCoolChick 酷雞</p>
+        <p><strong>角色介紹: </strong>一個隨處可見的路人勇者。</p>
+        <p><strong>職業: </strong>普通的大學生</p>
+        <p><strong>特殊技能: </strong>電路設計中階、Blender建模初階、程式設計中階、遊戲製作初階</p>
+        <p><strong>Email: </strong>102brady921013@gmail.com</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 作品展示區域 -->
+  <section class="works" id="works">
+    <h2>主視覺設計</h2>
+    <div class="item">
+      <div class="carousel">
+        <img src="./image/work_1_1.jpg" alt="work1 picture" class="carousel-img active">
+        <img src="./image/work_1_2.jpg" alt="work1 picture2" class="carousel-img">
+        <img src="./image/work_1_3.jpg" alt="work1 picture3" class="carousel-img">
+        <img src="./image/work_1_4.jpg" alt="work1 picture4" class="carousel-img">
+        <button class="carousel-btn left">&#8592;</button>
+        <button class="carousel-btn right">&#8594;</button>
+      </div>
+      <div class="carousel-desc">2024年清大電機之夜 配合IG排版設計成1800x600的尺寸</div>
+    </div>
+    <h2>門票設計</h2>
+    <div class="item">
+      <div class="carousel">
+        <img src="./image/work_2_1.jpg" alt="work2 picture" class="carousel-img active">
+        <img src="./image/work_2_2.jpg" alt="work2 picture2" class="carousel-img">
+        <button class="carousel-btn left">&#8592;</button>
+        <button class="carousel-btn right">&#8594;</button>
+      </div>
+      <div class="carousel-desc">2023年清大電機之夜 邊框使用特殊漸層顏色營造金屬質感</div>
+    </div>
+    <h2>Blender建模</h2>
+    <div class="item">
+      <div class="carousel">
+        <img src="./image/work_3_1.png" alt="work3 picture" class="carousel-img active">
+        <img src="./image/work_3_2.png" alt="work3 picture2" class="carousel-img">
+        <img src="./image/work_3_3.png" alt="work3 picture3" class="carousel-img">
+        <button class="carousel-btn left">&#8592;</button>
+        <button class="carousel-btn right">&#8594;</button>
+      </div>
+      <div class="carousel-desc">利用Blender建模 重新呈現BlackPink的MV "JUMP"</div>
+    </div>
+    <h2>營隊衣服設計</h2>
+    <div class="item">
+      <div class="carousel">
+        <img src="./image/work_4_1.png" alt="work4 picture" class="carousel-img active">
+        <img src="./image/work_4_2.png" alt="work4 picture2" class="carousel-img">
+        <img src="./image/work_4_3.png" alt="work4 picture3" class="carousel-img">
+        <img src="./image/work_4_4.png" alt="work4 picture4" class="carousel-img">
+        <button class="carousel-btn left">&#8592;</button>
+        <button class="carousel-btn right">&#8594;</button>
+      </div>
+      <div class="carousel-desc">2023清大厚營 簡單的向量圖形設計 最後沒有成功被選上</div>
+    </div> 
+   </section>
+  <!--成就解鎖區域-->
+  <section class="achievement" id="achievement">
+    <h1>成就解鎖</h1>
+    <div class="achievement-container">
+      <div class="achievement-single">
+        <img src="./image/ach_ToTheCore.png" alt="achievement image" class="achievement-img">
+        <img src="./image/ach_Lock.png" alt="achievement lock" class="achievement-lock" id="lock1">
+        <p><strong>前往地心</strong></p>
+      </div>
+      <div class="achievement-single">
+        <img src="./image/ach_Clock.png" alt="achievement image" class="achievement-img">
+        <img src="./image/ach_Lock.png" alt="achievement lock" class="achievement-lock" id="lock2">
+        <p><strong>流連忘返</strong></p>
+      </div>
+      <div class="achievement-single">
+        <img src="./image/ach_Finger.png" alt="achievement image" class="achievement-img">
+        <img src="./image/ach_Lock.png" alt="achievement lock" class="achievement-lock" id="lock3">
+        <p><strong>不要戳我</strong></p>
+      </div>
+    </div>
+  </section>
+
+  </section>
+  <!-- 頁尾區塊 -->
+  <footer>
+    <div class="footer-desc">恭喜你滑到了最底部 解鎖<strong> 前往地心 </strong>成就</div>
+    <div class="footer-nav">
+      <a href="#profile">個人資料</a>
+      <a href="#works">作品展示</a>
+      <a href="#top">回到頂部</a>
+    </div>
+    <div style="color:#aaa;font-size:0.95rem;">
+      &copy; <span id="footerYear"></span> MrCoolChick
+    </div>
+  </footer>
+
+  <script>
+    // 自動更新頁尾年份
+    document.getElementById('footerYear').textContent = new Date().getFullYear();
+    // 作品區塊圖片滑動（支援多個 carousel）
+    document.querySelectorAll('.item .carousel').forEach(carousel => {
+      const imgs = carousel.querySelectorAll('.carousel-img');
+      const leftBtn = carousel.querySelector('.carousel-btn.left');
+      const rightBtn = carousel.querySelector('.carousel-btn.right');
+      let idx = 0;
+      function showImg(i) {
+        imgs.forEach((img, n) => img.classList.toggle('active', n === i));
+      }
+      leftBtn.addEventListener('click', () => {
+        idx = (idx - 1 + imgs.length) % imgs.length;
+        showImg(idx);
+      });
+      rightBtn.addEventListener('click', () => {
+        idx = (idx + 1) % imgs.length;
+        showImg(idx);
+      });
+    });
+  // 成就提示函式
+  function showAchievement(msg) {
+    const achievement = document.createElement('div');
+    achievement.textContent = msg;
+    achievement.style.position = 'fixed';
+    achievement.style.top = '40px';
+    achievement.style.left = '50%';
+    achievement.style.transform = 'translateX(-50%)';
+    achievement.style.background = '#222';
+    achievement.style.color = '#ffd700';
+    achievement.style.padding = '1rem 2rem';
+    achievement.style.borderRadius = '8px';
+    achievement.style.fontSize = '1.2rem';
+    achievement.style.boxShadow = '0 2px 8px rgba(0,0,0,0.2)';
+    achievement.style.zIndex = '9999';
+    document.body.appendChild(achievement);
+    setTimeout(() => {
+      achievement.remove();
+    }, 3000);
+  }
+  // 偵測滾動到頁面底部
+  let achievementShown = false;
+  window.addEventListener('scroll', function() {
+    if (achievementShown) return;
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 2) {
+      achievementShown = true;
+      showAchievement('達成成就：前往地心');
+      document.getElementById('lock1').classList.add('unlocked');
+    }
+  });
+  // 2分鐘後解鎖成就2
+  setTimeout(function() {
+    // 避免重複解鎖
+    if (!document.getElementById('lock2').classList.contains('unlocked')) {
+      document.getElementById('lock2').classList.add('unlocked');
+      showAchievement('達成成就：流連忘返');
+    }
+  }, 120000);
+  // 點擊頭像10次解鎖成就3
+  let pokeCount = 0;
+  document.querySelector('.profile-img').addEventListener('click', function() {
+    pokeCount++;
+    if (pokeCount === 10) {
+      document.getElementById('lock3').classList.add('unlocked');
+      showAchievement('達成成就：不要戳我');
+    }
+  });
+  </script>
+</body>
+</html>
