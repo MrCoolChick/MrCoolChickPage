@@ -100,8 +100,6 @@
       height: 300px;
       border-radius: 5%;
       object-fit: cover;
-      margin-left: auto;
-      margin-right: 1.5rem;
     }
     .profile-text {
       font-size: 1.1rem;
@@ -188,7 +186,7 @@
       z-index: 1;
       width: 200px;
       height: 200px;
-      border-radius: 32px;
+      border-radius: 10%;
       object-fit: cover;
       image-rendering: pixelated;
     }
@@ -198,8 +196,8 @@
       left: 0;
       z-index: 2;
       width: 200px;
-      height: 80%;
-      border-radius: 32px;
+      height: 200px;
+      border-radius: 10%;
       object-fit: cover;
       image-rendering: pixelated;
       opacity: 0.9;
@@ -221,6 +219,22 @@
       font-weight: bold;
       color: #000000;
       white-space: nowrap;
+    }
+    .achievement-toast {
+      position: fixed;
+      top: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #222;
+      color: #ffd700;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      z-index: 9999;
+      white-space: nowrap;
+      opacity: 1;
+      transition: opacity 0.5s;
     }
     /* 頁尾樣式 */
     footer {
@@ -245,9 +259,21 @@
     .footer-desc {
       margin-bottom: 0.7rem;
       color: #ccc;
-      font-size: 0.98rem;
+      font-size: 1rem;
     }
     @media (max-width: 768px) {
+    h1 {
+      font-size: 1.5rem;
+    }
+    h2 {
+      font-size: 1rem;
+    }
+    p {
+      font-size: 0.9rem;
+    }
+    .header-title {
+      font-size: 1rem;
+    }
     .header-nav {
       display: none;
       position: absolute;
@@ -257,40 +283,72 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.15);
       border-radius: 8px;
       flex-direction: column;
-      padding: 1rem 1.5rem;
+      padding: 1rem 1rem;
       z-index: 1002;
     }
     .header-nav.active {
       display: flex;
     }
     .header-nav a {
-    margin: 0.8rem 0; 
-    padding: 1rem 0;
-    font-size: 1.2rem;
-    text-align: center;
+      margin: 0.8rem 0; 
+      padding: 1rem 0;
+      font-size: 1rem;
+      text-align: center;
     }
     .hamburger {
       display: flex;
     }
     .profile-container {
-      display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      width: 80%;
-      margin: 0 auto;
-      gap: 1.5rem;
     }
     .profile-img {
-      width: 300px;
-      height: 300px;
+      width: 100%;
+      height: 100%;
       border-radius: 5%;
       object-fit: cover;
       margin: auto;
     }
+    .profile-text {
+      font-size: 1rem;
+      margin: 0;
+      text-align: center;
+    }
     .carousel {
       max-width: 100%;
-      height: 50vh;
+      min-width: none;
+      max-height: 40vw;
+      height: 40vw;
+      min-height: 10vh;
+    }
+    .carousel-desc{
+      font-size: 0.8rem;
+    }
+    .achievement-container {
+      height: 150px;
+    }
+    .achievement-single {
+      width: 100px;
+      height: 140px;
+    }
+    .achievement-img {
+      width: 100px;
+      height: 100px;
+    }
+    .achievement-lock {
+      width: 100px;
+      height: 100px;
+    }
+    .achievement-single p {
+      font-size: 0.8rem;
+    }
+    .achievement-toast {
+      font-size: 1rem;
+    }
+    .footer-nav a {
+      font-size: 0.8rem;
+    }
+    .footer-desc {
+      font-size: 0.8rem;
     }
   }
   </style>
@@ -381,6 +439,11 @@
     <p style="margin-top: 0; margin-bottom: 50px;">在網站有一些成就等待你來解鎖！</p>
     <div class="achievement-container">
       <div class="achievement-single">
+        <img src="./image/ach_FirstTime.png" alt="achievement image" class="achievement-img">
+        <img src="./image/ach_Lock.png" alt="achievement lock" class="achievement-lock" id="lock4">
+        <p><strong>初次見面</strong></p>
+      </div>
+      <div class="achievement-single">
         <img src="./image/ach_ToTheCore.png" alt="achievement image" class="achievement-img">
         <img src="./image/ach_Lock.png" alt="achievement lock" class="achievement-lock" id="lock1">
         <p><strong>前往地心</strong></p>
@@ -394,6 +457,16 @@
         <img src="./image/ach_Finger.png" alt="achievement image" class="achievement-img">
         <img src="./image/ach_Lock.png" alt="achievement lock" class="achievement-lock" id="lock3">
         <p><strong>不要戳我</strong></p>
+      </div>
+      <div class="achievement-single">
+        <img src="./image/ach_Hidden.png" alt="achievement image" class="achievement-img" id="hidden-achievement">
+        <img src="./image/ach_Lock.png" alt="achievement lock" class="achievement-lock" id="lock5">
+        <p><strong>隱藏成就</strong></p>
+      </div>
+      <div class="achievement-single">
+        <img src="./image/ach_Night.png" alt="achievement image" class="achievement-img">
+        <img src="./image/ach_Lock.png" alt="achievement lock" class="achievement-lock" id="lock6">
+        <p><strong>深夜探險</strong></p>
       </div>
     </div>
   </section>
@@ -413,28 +486,27 @@
   </footer>
 
   <script>
+    // 頁面載入時滾動到頂部
+    window.history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
     // 自動更新頁尾年份
     document.getElementById('footerYear').textContent = new Date().getFullYear();
     // 成就提示函式
     function showAchievement(msg) {
       const achievement = document.createElement('div');
       achievement.textContent = msg;
-      achievement.style.position = 'fixed';
-      achievement.style.top = '40px';
-      achievement.style.left = '50%';
-      achievement.style.transform = 'translateX(-50%)';
-      achievement.style.background = '#222';
-      achievement.style.color = '#ffd700';
-      achievement.style.padding = '1rem 2rem';
-      achievement.style.borderRadius = '8px';
-      achievement.style.fontSize = '1.2rem';
-      achievement.style.boxShadow = '0 2px 8px rgba(0,0,0,0.2)';
-      achievement.style.zIndex = '9999';
+      achievement.className = 'achievement-toast';
       document.body.appendChild(achievement);
       setTimeout(() => {
-        achievement.remove();
-      }, 3000);
+        achievement.style.opacity = '0';
+        achievement.addEventListener('transitionend', () => {
+          achievement.remove();
+        }, { once: true });
+      }, 2500); // 2500ms visible, 500ms fade out
     }
+    // 頁面載入時解鎖成就4
+    document.getElementById('lock4').classList.add('unlocked');
+    showAchievement('達成成就：初次見面');
     // 偵測滾動到頁面底部
     let achievementShown = false;
     window.addEventListener('scroll', function() {
@@ -462,6 +534,20 @@
         showAchievement('達成成就：不要戳我');
       }
     });
+    // 點擊隱藏成就圖片解鎖成就5
+    document.getElementById('lock5').addEventListener('click', function() {
+      document.getElementById('lock5').classList.add('unlocked');
+      showAchievement('達成成就：隱藏成就');
+    });
+    // 深夜進站解鎖成就6
+    const now = new Date();
+    const hour = now.getHours();
+    if (hour >= 0 && hour < 4) {
+      if (!document.getElementById('lock6').classList.contains('unlocked')) {
+        document.getElementById('lock6').classList.add('unlocked');
+        showAchievement('達成成就：深夜探險');
+      }
+    }
     // 漢堡選單切換
     document.querySelector('.hamburger').addEventListener('click', function() {
       document.querySelector('.header-nav').classList.toggle('active');
