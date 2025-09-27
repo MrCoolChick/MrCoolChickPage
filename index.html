@@ -430,6 +430,7 @@
     <div class="carousel">
       <img src="./image/work_6_1.jpg" alt="work6 picture1" class="carousel-img">
       <img src="./image/work_6_2.jpg" alt="work6 picture2" class="carousel-img">
+      <img src="./image/work_6_3.jpg" alt="work6 picture3" class="carousel-img">
     </div>
     <div class="carousel-desc">雙通道可調式增益低雜訊放大器 2025電機專題</div>
   </section>
@@ -467,6 +468,11 @@
         <img src="./image/ach_Night.png" alt="achievement image" class="achievement-img">
         <img src="./image/ach_Lock.png" alt="achievement lock" class="achievement-lock" id="lock6">
         <p><strong>深夜探險</strong></p>
+      </div>
+      <div class="achievement-single">
+        <img src="./image/ach_Top.png" alt="achievement image" class="achievement-img">
+        <img src="./image/ach_Lock.png" alt="achievement lock" class="achievement-lock" id="lock7">
+        <p><strong>頂天立地</strong></p>
       </div>
     </div>
   </section>
@@ -508,11 +514,11 @@
     document.getElementById('lock4').classList.add('unlocked');
     showAchievement('達成成就：初次見面');
     // 偵測滾動到頁面底部
-    let achievementShown = false;
+    let achievement2Shown = false;
     window.addEventListener('scroll', function() {
-      if (achievementShown) return;
+      if (achievement2Shown) return;
       if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 2) {
-        achievementShown = true;
+        achievement2Shown = true;
         showAchievement('達成成就：前往地心');
         document.getElementById('lock1').classList.add('unlocked');
       }
@@ -548,6 +554,15 @@
         showAchievement('達成成就：深夜探險');
       }
     }
+    // 點擊「回到頂部」5次解鎖成就7
+    let topClickCount = 0;
+    document.querySelector('a[href="#top"]').addEventListener('click', function() {
+      topClickCount++;
+      if (topClickCount === 5) {
+        document.getElementById('lock7').classList.add('unlocked');
+        showAchievement('達成成就：頂天立地');
+      }
+    });
     // 漢堡選單切換
     document.querySelector('.hamburger').addEventListener('click', function() {
       document.querySelector('.header-nav').classList.toggle('active');
