@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-Hant">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>MiniGame 遊戲庫</title>
+
+		<!-- Reuse site-wide styles (from project root) -->
+		<link rel="stylesheet" href="../css/main.css" />
+
+		<style>
+			body {
+				margin: 0;
+				background: #ffd700;
+			}
+
+			/* Minimal layout only; avoid introducing new theme colors */
+			.container {
+				max-width: 80%;
+				margin: 0 auto;
+				padding: 24px 16px;
+				
+			}
+			.card {
+				padding: 16px;
+				border: 1px solid currentColor;
+				border-radius: 12px;
+				margin: 12px 0;
+                background: #ffffff;
+
+			}
+			.links {
+				display: grid;
+				gap: 12px;
+				margin-top: 16px;
+			}
+			.link {
+				display: block;
+				padding: 12px 14px;
+				border: 1px solid currentColor;
+				border-radius: 12px;
+				text-decoration: none;
+			}
+			.link:focus {
+				outline: 2px solid currentColor;
+				outline-offset: 2px;
+			}
+			.sub {
+				opacity: 0.85;
+				font-size: 0.95em;
+				margin-top: 4px;
+			}
+		</style>
+	</head>
+	<body>
+		<main class="container">
+			<section class="card">
+				<h1>遊戲庫</h1>
+				<p class="sub">選一個遊戲開始，或回到主頁。</p>
+
+				<nav class="links" aria-label="遊戲列表">
+					<a class="link" href="./NTHUFoodWheel/index.html">
+						<strong>NTHUFoodWheel</strong>
+						<div class="sub">中午吃什麼</div>
+					</a>
+
+					<a class="link" href="./WhoIsHimGame/index.html">
+						<strong>WhoIsHimGame</strong>
+						<div class="sub">猜猜我們說的是誰</div>
+					</a>
+
+					<a class="link" href="../index.html">
+						<strong>回到 MrCoolChickPage</strong>
+						<div class="sub">最頂層首頁</div>
+					</a>
+				</nav>
+			</section>
+		</main>
+	</body>
+</html>

@@ -44,6 +44,13 @@ button {
 
 #resetBtn:hover { background-color: #c82333; }
 
+#backBtn {
+    background-color: #6c757d;
+    color: white;
+}
+
+#backBtn:hover { background-color: #5a6268; }
+
 .question-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
