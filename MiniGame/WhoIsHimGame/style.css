@@ -33,23 +33,27 @@ button {
 #drawBtn {
     background-color: #28a745;
     color: white;
+    font-weight: 700;
 }
 
 #drawBtn:hover { background-color: #218838; }
 
 #resetBtn {
-    background-color: #dc3545;
-    color: white;
+    background-color: #ffffff;
+    border: 1px solid #111827;
+    color: #111827;
+    font-weight: 700;
 }
 
-#resetBtn:hover { background-color: #c82333; }
+#resetBtn:hover { background-color: #f8f9fa; }
 
 #backBtn {
-    background-color: #6c757d;
-    color: white;
+    background-color: #ffffff;
+    border: 1px solid #111827;
+    color: #111827;
+    font-weight: 700;
 }
-
-#backBtn:hover { background-color: #5a6268; }
+#backBtn:hover { background-color: #f8f9fa; }
 
 .question-grid {
     display: grid;
@@ -62,7 +66,7 @@ button {
     background-color: #e9ecef;
     padding: 20px;
     border-radius: 8px;
-    border-left: 5px solid #007bff;
+    border-left: 5px solid #111827;
     font-weight: bold;
     color: #495057;
     animation: fadeIn 0.5s;
