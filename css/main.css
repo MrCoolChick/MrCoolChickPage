@@ -1,0 +1,344 @@
+@font-face {
+  font-family: 'Cubic';
+  src: url('../font/Cubic_11_1.100_R.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+body {
+  font-family: 'Cubic', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  background-color: #ffffff;
+}
+html {
+  scroll-behavior: smooth;
+}
+section {
+  padding: 2rem;
+}
+/* 頁首樣式 */
+header {
+  background: rgba(255, 255, 255, 0.85);
+  color: #000000;
+  padding: 10px;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 1001;
+  backdrop-filter: blur(2px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: auto;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+.header-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: left;
+}
+.header-nav a {
+  color: #000000;
+  text-decoration: none;
+  margin: 0 1.5rem;
+  font-size: 1rem;
+  transition: color 0.2s;
+  text-align: right;
+}
+.header-nav a:hover {
+  color: #515151;
+}
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1100;
+}
+.hamburger span {
+  display: block;
+  width: 28px;
+  height: 4px;
+  margin: 4px 0;
+  background: #222;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+/* 個人資料區域樣式 */
+.profile {
+  background: #ffd700;
+}
+.profile-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  margin: 0 auto;
+  gap: 1.5rem;
+}
+.profile-img {
+  width: 300px;
+  height: 300px;
+  border-radius: 5%;
+  object-fit: cover;
+}
+.profile-text {
+  font-size: 1.1rem;
+  margin-left: 0;
+  margin-right: auto;
+}
+.works {
+  background: linear-gradient(to bottom, #ffffff, #fff4ae);
+  padding: 1.5rem;
+  text-align: center;
+}
+/* 作品輪播樣式 */
+.carousel {
+  display: flex;
+  position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: max-content;
+  max-width: 80%;
+  border-radius: 4px;
+  margin: 0 auto;
+  min-height: 600px;
+  height: 80vh;
+  max-height: 1000px;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #000000 transparent;
+  justify-content: flex-start;
+  align-items: center;
+  padding-bottom: 0;
+}
+.carousel-img {
+  height: 95%;
+  width: auto;
+  object-fit: contain;
+  border-radius: 10px;
+  margin-right: 12px;
+  flex: 0 0 auto;
+  image-rendering: pixelated;
+}
+.carousel-desc {
+  left: 10%;
+  bottom: 0;
+  width: 80%;
+  color: #000000;
+  font-size: 1rem;
+  padding: 0.7rem 1rem;
+  border-radius: 0 0 4px 4px;
+  z-index: 3;
+  margin: 0 auto;
+  box-sizing: border-box;    
+}
+/* 成就解鎖區域樣式 */
+.achievement {
+  background: #ffd700;
+  text-align: center;
+}
+.achievement-container {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  margin: 0 auto;
+  width: max-content;
+  max-width: 100%;
+  height: 250px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #000000 transparent;
+  justify-content: flex-start;
+  align-items: center;
+}
+.achievement-single {
+  position: relative;
+  width: 200px;
+  height: 250px;
+  flex-shrink: 0;  
+}
+.achievement-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 200px;
+  height: 200px;
+  border-radius: 10%;
+  object-fit: cover;
+  image-rendering: pixelated;
+}
+.achievement-lock {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 200px;
+  height: 200px;
+  border-radius: 10%;
+  object-fit: cover;
+  image-rendering: pixelated;
+  opacity: 0.9;
+  transition: opacity 0.5s;
+}
+.achievement-lock.unlocked {
+  opacity: 0;
+  pointer-events: none;
+}
+.achievement-single p {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #000000;
+  white-space: nowrap;
+}
+.achievement-toast {
+  position: fixed;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #222;
+  color: #ffd700;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  z-index: 9999;
+  white-space: nowrap;
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+/* 頁尾樣式 */
+footer {
+  background: #333;
+  color: #fff;
+  text-align: center;
+  padding: 2rem 1rem 1rem 1rem;
+}
+.footer-nav {
+  margin-bottom: 1rem;
+}
+.footer-nav a {
+  color: #ffd700;
+  text-decoration: none;
+  margin: 0 1.2rem;
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+.footer-nav a:hover {
+  color: #fff;
+}
+.footer-desc {
+  margin-bottom: 0.7rem;
+  color: #ccc;
+  font-size: 1rem;
+}
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+  h2 {
+    font-size: 1rem;
+  }
+  p {
+    font-size: 0.9rem;
+  }
+  .header-title {
+    font-size: 1rem;
+  }
+  .header-nav {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 16px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    border-radius: 8px;
+    flex-direction: column;
+    padding: 1rem 1rem;
+    z-index: 1002;
+  }
+  .header-nav.active {
+    display: flex;
+  }
+  .header-nav a {
+    margin: 0.8rem 0; 
+    padding: 1rem 0;
+    font-size: 1rem;
+    text-align: center;
+  }
+  .hamburger {
+    display: flex;
+  }
+  .profile-container {
+    flex-direction: column;
+  }
+  .profile-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 5%;
+    object-fit: cover;
+    margin: auto;
+  }
+  .profile-text {
+    font-size: 1rem;
+    margin: 0;
+  }
+  .carousel {
+    max-width: 100%;
+    min-width: none;
+    max-height: 40vw;
+    height: 40vw;
+    min-height: 10vh;
+  }
+  .carousel-desc{
+    font-size: 0.8rem;
+  }
+  .achievement-container {
+    height: 150px;
+  }
+  .achievement-single {
+    width: 100px;
+    height: 140px;
+  }
+  .achievement-img {
+    width: 100px;
+    height: 100px;
+  }
+  .achievement-lock {
+    width: 100px;
+    height: 100px;
+  }
+  .achievement-single p {
+    font-size: 0.8rem;
+  }
+  .achievement-toast {
+    font-size: 1rem;
+  }
+  .footer-nav a {
+    font-size: 0.8rem;
+  }
+  .footer-desc {
+    font-size: 0.8rem;
+  }
+}
