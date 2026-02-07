@@ -329,14 +329,16 @@ function restart() {
 	resultEl.innerHTML = '';
 }
 
-startBtn.addEventListener('click', startGame);
-confirmAnswerBtn.addEventListener('click', confirmAnswer);
-restartBtn.addEventListener('click', restart);
 
-if (redrawBtn) {
-	redrawBtn.addEventListener('click', redrawQuestion);
-}
-
-answerInputEl.addEventListener('keydown', (e) => {
-	if (e.key === 'Enter') confirmAnswer();
+document.addEventListener('DOMContentLoaded', () => {
+	startBtn.addEventListener('click', startGame);
+	confirmAnswerBtn.addEventListener('click', confirmAnswer);
+	restartBtn.addEventListener('click', restart);
+	const redrawBtn = $('redrawBtn');
+	if (redrawBtn) {
+		redrawBtn.addEventListener('click', redrawQuestion);
+	}
+	answerInputEl.addEventListener('keydown', (e) => {
+		if (e.key === 'Enter') confirmAnswer();
+	});
 });
