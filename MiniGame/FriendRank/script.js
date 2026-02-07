@@ -18,6 +18,7 @@ const placeTitleEl = $('placeTitle');
 const slotsEl = $('slots');
 const resultEl = $('result');
 const restartBtn = $('restartBtn');
+const redrawBtn = $('redrawBtn');
 
 /** @type {{count:number, question:string, players:Array<{id:number,label:string,answer:number|null,placedAt:number|null}>, slots:(number|null)[], current:number, phase:'setup'|'answer'|'place'|'reveal'} */
 let state = null;
@@ -74,6 +75,36 @@ function startGame() {
 	questionTextEl.textContent = state.question;
 	render();
 	resetUIForNewTurn();
+	answerInputEl.focus();
+}
+
+function redrawQuestion() {
+	const count = state?.count ?? clampInt(playerCountEl.value, 2, 10);
+	if (count == null) {
+		alert('請輸入正確的玩家數量（2～10）。');
+		return;
+	}
+
+	state = {
+		count,
+		question: pickRandomQuestion(),
+		players: Array.from({ length: count }, (_, i) => ({
+			id: i,
+			label: `玩家 ${i + 1}`,
+			answer: null,
+			placedAt: null,
+		})),
+		slots: Array.from({ length: count }, () => null),
+		current: 0,
+		phase: 'answer',
+	};
+
+	setupEl.classList.add('hidden');
+	gameEl.classList.remove('hidden');
+
+	questionTextEl.textContent = state.question;
+	resetUIForNewTurn();
+	render();
 	answerInputEl.focus();
 }
 
@@ -301,6 +332,10 @@ function restart() {
 startBtn.addEventListener('click', startGame);
 confirmAnswerBtn.addEventListener('click', confirmAnswer);
 restartBtn.addEventListener('click', restart);
+
+if (redrawBtn) {
+	redrawBtn.addEventListener('click', redrawQuestion);
+}
 
 answerInputEl.addEventListener('keydown', (e) => {
 	if (e.key === 'Enter') confirmAnswer();
