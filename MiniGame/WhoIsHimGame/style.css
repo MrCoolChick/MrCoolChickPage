@@ -1,5 +1,13 @@
+@font-face {
+    font-family: 'Cubic';
+    src: url('../../font/Cubic_11_1.100_R.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Cubic', Arial, sans-serif;
     background-color: #f0f2f5;
     display: flex;
     justify-content: center;
@@ -27,7 +35,11 @@ button {
     cursor: pointer;
     border: none;
     border-radius: 5px;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, filter 0.15s;
+}
+
+button:hover:not(:disabled) {
+	filter: brightness(0.92);
 }
 
 #drawBtn {
@@ -36,7 +48,6 @@ button {
     font-weight: 700;
 }
 
-#drawBtn:hover { background-color: #218838; }
 
 #resetBtn {
     background-color: #ffffff;
@@ -45,7 +56,6 @@ button {
     font-weight: 700;
 }
 
-#resetBtn:hover { background-color: #f8f9fa; }
 
 #backBtn {
     background-color: #ffffff;
@@ -53,7 +63,6 @@ button {
     color: #111827;
     font-weight: 700;
 }
-#backBtn:hover { background-color: #f8f9fa; }
 
 .question-grid {
     display: grid;

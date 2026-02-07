@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>朋友排行榜</title>
+	<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+	<div class="container">
+		<h1>朋友排行榜</h1>
+		<p class="desc">
+			先決定玩家數量，系統抽出一個可量化題目。玩家輪流輸入自己的數字，並把自己放到排行榜的一個空位置。
+			全部完成後揭曉答案：若由上到下剛好對應數字由大到小，獲得 5 顆星；否則依錯誤處扣分。
+		</p>
+
+		<div id="setup" class="card">
+			<div class="row">
+				<label for="playerCount" class="label">玩家數量</label>
+				<input id="playerCount" class="input" type="number" min="2" max="10" value="4" />
+				<button id="startBtn" class="btn primary" type="button">開始遊戲</button>
+				<button id="backBtnSetup" class="btn" type="button" onclick="location.href='../../index.html'">回到首頁</button>
+			</div>
+			<div class="hint">限制 2～10 人；玩家以「玩家 1、玩家 2…」表示。</div>
+		</div>
+
+		<div id="game" class="card hidden">
+			<div class="question">
+				<div class="k">題目</div>
+				<div id="questionText" class="v">—</div>
+			</div>
+
+			<div class="turn">
+				<div class="k">現在輪到</div>
+				<div id="currentPlayer" class="v">—</div>
+			</div>
+
+			<div class="row wrap">
+				<label for="answerInput" class="label">輸入你的數字</label>
+				<input id="answerInput" class="input" type="number" inputmode="decimal" placeholder="例如 1、5、12" />
+				<button id="confirmAnswerBtn" class="btn" type="button">確認數字</button>
+			</div>
+
+			<div id="placeArea" class="place-area hidden">
+				<div id="placeTitle" class="k">選擇你要放的位置（點空格）</div>
+				<div id="slots" class="slots"></div>
+				<div class="hint">每個已放置的格子右側都有上移/下移，可調整前面玩家排序。</div>
+				<div class="hint">提示：排行榜最上面代表數字最大。</div>
+			</div>
+
+			<div class="controls">
+				<button id="restartBtn" class="btn" type="button">重新開始</button>
+				<button id="backBtn" class="btn" type="button" onclick="location.href='../../index.html'">回到首頁</button>
+			</div>
+
+			<div id="result" class="result hidden" aria-live="polite"></div>
+		</div>
+	</div>
+
+	<script src="questions.js"></script>
+	<script src="script.js"></script>
+</body>
+</html>

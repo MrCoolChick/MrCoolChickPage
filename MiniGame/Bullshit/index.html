@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>誰在唬爛</title>
+	<link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+	<div class="container">
+		<h1>誰在唬爛</h1>
+		<div class="card" role="application" aria-label="誰在唬爛遊戲">
+			<!-- Setup -->
+			<section id="panel-setup" class="panel" aria-label="設定玩家數量">
+				<h2>1) 設定玩家數量</h2>
+				<div class="row">
+					<label class="label" for="playerCount">玩家數量</label>
+					<input id="playerCount" class="input" type="number" inputmode="numeric" min="3" max="20" value="5" />
+				</div>
+				<p class="hint">至少 3 人：1 位檢察官、1 位目擊證人，其餘都是犯人。</p>
+				<div class="controls">
+					<button id="btn-confirmPlayers" type="button" class="btn btn-primary">確認玩家數</button>
+					<button id="btn-backHome-setup" type="button" class="btn btn-ghost">回到首頁</button>
+				</div>
+				<p id="setupError" class="error" aria-live="polite"></p>
+			</section>
+
+			<!-- Question -->
+			<section id="panel-question" class="panel" aria-label="抽題目" hidden>
+				<h2>2) 抽題目</h2>
+				<div class="termBox">
+					<div class="termLabel">題目詞彙</div>
+					<div id="termText" class="termText">—</div>
+				</div>
+				<p class="hint">隨時可以重抽。只有目擊證人能按「查看解釋」偷看正確解釋。</p>
+				<div class="controls">
+					<button id="btn-redraw" type="button" class="btn btn-secondary">重抽題目</button>
+					<button id="btn-startRoles" type="button" class="btn btn-primary">開始分配身分</button>
+					<button id="btn-changePlayers" type="button" class="btn btn-ghost">更改玩家數</button>
+				</div>
+				<p id="questionError" class="error" aria-live="polite"></p>
+			</section>
+
+			<!-- Roles -->
+			<section id="panel-roles" class="panel" aria-label="輪流查看身分" hidden>
+				<h2>3) 輪流查看身分</h2>
+				<div class="roleHeader">
+					<div id="turnPlayer" class="turnPlayer">請把螢幕交給玩家 1</div>
+					<div class="termMini">題目：<span id="termMiniText">—</span></div>
+				</div>
+				<div id="roleCover" class="cover">
+					<p class="hint">只有這位玩家可以看螢幕，其他人請轉頭或閉眼。</p>
+					<div class="controls">
+						<button id="btn-revealRole" type="button" class="btn btn-primary">查看我的身分</button>
+					</div>
+				</div>
+				<div id="roleReveal" class="reveal" hidden>
+					<div id="roleText" class="roleText">—</div>
+					<div id="roleHint" class="roleHint">—</div>
+					<div id="explainArea" class="explainArea" hidden>
+						<button id="btn-viewExplain" type="button" class="btn btn-secondary">查看解釋</button>
+						<div id="explainText" class="explainText" hidden></div>
+					</div>
+					<div class="controls">
+						<button id="btn-nextPlayer" type="button" class="btn btn-primary">我看完了，下一位</button>
+					</div>
+				</div>
+			</section>
+
+			<!-- Night ready -->
+			<section id="panel-nightReady" class="panel" aria-label="天黑前" hidden>
+				<h2>4) 天黑請閉眼</h2>
+				<div class="termBox">
+					<div class="termLabel">題目詞彙</div>
+					<div id="termTextNight" class="termText">—</div>
+				</div>
+				<div id="prosecutorPublic" class="publicBox" aria-live="polite"></div>
+				<p class="hint">目擊證人在倒數期間偷偷按「查看解釋」。其他人請閉眼。</p>
+				<div class="controls">
+					<button id="btn-startNight" type="button" class="btn btn-primary">天黑請閉眼（開始60秒）</button>
+				</div>
+			</section>
+
+			<!-- Night timer -->
+			<section id="panel-nightTimer" class="panel" aria-label="夜晚倒數" hidden>
+				<h2>夜晚倒數</h2>
+				<div class="timer" aria-live="polite">
+					<span id="timerText">60</span>
+					<span class="timerUnit">秒</span>
+				</div>
+				<div class="controls">
+					<button id="btn-viewExplainNight" type="button" class="btn btn-secondary">查看解釋（僅目擊證人）</button>
+				</div>
+				<div id="explainTextNight" class="explainText" hidden></div>
+				<p class="hint">倒數結束會自動進入檢察官猜測。</p>
+			</section>
+
+			<!-- Guess -->
+			<section id="panel-guess" class="panel" aria-label="檢察官猜測" hidden>
+				<h2>5) 檢察官猜測目擊證人</h2>
+				<p class="hint">檢察官聽完所有人的內容後，按下玩家編號猜測誰是目擊證人。</p>
+				<div id="guessGrid" class="guessGrid" aria-label="玩家編號按鈕"></div>
+				<div id="guessResult" class="result" aria-live="polite"></div>
+				<div class="controls">
+					<button id="btn-restart" type="button" class="btn btn-primary">再玩一次</button>
+					<button id="btn-backHome-end" type="button" class="btn btn-ghost">回到首頁</button>
+				</div>
+			</section>
+		</div>
+	</div>
+
+	<script src="questions.js"></script>
+	<script src="script.js"></script>
+</body>
+</html>

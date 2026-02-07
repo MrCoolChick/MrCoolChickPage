@@ -1,9 +1,17 @@
 
 * { box-sizing: border-box; }
 
+@font-face {
+  font-family: 'Cubic';
+  src: url('../../font/Cubic_11_1.100_R.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 body {
 	margin: 0;
-	font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans TC", Arial, sans-serif;
+	font-family: 'Cubic', Arial, sans-serif;
 	background: #f6f7fb;
 	color: #111827;
 }
@@ -73,6 +81,11 @@ h1 {
 	cursor: pointer;
 	background: #111827;
 	color: #ffffff;
+	transition: filter 0.15s;
+}
+
+#drawBtn:hover:not(:disabled) {
+	filter: brightness(0.92);
 }
 
 #drawBtn:disabled {
@@ -89,6 +102,11 @@ h1 {
 	cursor: pointer;
 	background: #ffffff;
 	color: #111827;
+	transition: filter 0.15s;
+}
+
+#backBtn:hover {
+	filter: brightness(0.92);
 }
 
 .result {
