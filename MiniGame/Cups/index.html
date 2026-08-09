@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cappuccino Board Game</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <h1>☕ Cappuccino</h1>
+  <div class="sub">2–4 人 · 點擊你控制的堆疊，再點擊相鄰目標堆疊</div>
+
+  <div class="layout">
+    <aside class="panel">
+      <div class="rules">
+        <strong>遊戲規則</strong><br>
+        1. 頂端顏色代表目前控制者。<br>
+        2. 只能移動自己控制的堆疊。<br>
+        3. 移動堆疊高度 ≥ 目標堆疊高度才可吃掉。<br>
+        4. 吃掉後，兩堆合併，移動方的顏色在最上面。<br>
+        5. 無法移動的玩家跳過，直到所有玩家都無法行動。<br>
+        6. 結束時，各色所有杯子高度總和最高者獲勝。
+      </div>
+      <button id="newGame">重新開始</button>
+      <button id="pass">本回合跳過</button>
+      <div class="scores" id="scores"></div>
+      <div class="legend">
+        <div><span class="dot red"></span>紅</div>
+        <div><span class="dot blue"></span>藍</div>
+        <div><span class="dot green"></span>綠</div>
+        <div><span class="dot yellow"></span>黃</div>
+      </div>
+      <div class="note">提示：電腦玩家會自動選擇合法移動；你可以在設定中切換人數。</div>
+      <label style="display:block;margin-top:12px;font-size:14px;font-weight:700">
+        玩家數
+        <select id="playerCount" style="width:100%;padding:9px;margin-top:5px;border-radius:9px;border:1px solid #d8c9b8">
+          <option value="2">2 人</option><option value="3">3 人</option><option value="4" selected>4 人</option>
+        </select>
+      </label>
+      <label style="display:block;margin-top:10px;font-size:14px">
+        <input type="checkbox" id="ai" checked> 啟用電腦玩家（你控制紅色）
+      </label>
+    </aside>
+
+    <main class="boardbox">
+      <div id="turn" class="board-turn">準備開始</div>
+      <div id="status" class="status">點擊「重新開始」開始遊戲。</div>
+      <div id="board"></div>
+    </main>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
